@@ -43,7 +43,7 @@ public function paymentGateway($reference)
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-      "Authorization: Bearer sk_test_af90ce4eab7357eda3474f44f5309f16fcf7fce2",
+      "Authorization: Bearer ************************************************",
       "Cache-Control: no-cache",
     ),
   ));
