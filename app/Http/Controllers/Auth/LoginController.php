@@ -95,7 +95,7 @@ $user_data =array(
 if (Auth::guard('customer')->attempt( $user_data ,$request->filled('remember'))) {
     // if  success login
   //mail function
-    Mail::send('mail.newcustomer',['detail'=>$request->fname],function($message) use($request){
+    Mail::send('email.newcustomer',['fname'=>$request->fname],function($message) use($request){
     $message->to($request->email);
     $message->subject('Account Created Successfully');
 });
