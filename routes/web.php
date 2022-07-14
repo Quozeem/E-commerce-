@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
+//Customer LOgin / Create Account Route
+Route::group(['namespace'=>'Auth'],function(){
+Route::get('customerlogin','LoginController@viewlogin')->name('viewlogin');
+Route::post('customerlogin','LoginController@customerlogin')->name('logincustomer');
+Route::post('customers','LoginController@CustomerRegistration');
+});
 
 Route::get('/', function () {
     return view('welcome');
