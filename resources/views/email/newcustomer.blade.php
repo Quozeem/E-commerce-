@@ -72,22 +72,13 @@
     <div style="padding-right:5%;padding-left:5%;margin-top:5%;margin-bottom:9%">
 <div style="text-align:center;">
 <img src="assets/images/QOZTORE22.png" class="mobile-logo" alt="Logo"></div>
-<h3 style="color:777;">Dear femi</h3>
+<h3 style="color:777;">Dear {{$fname}}</h3>
 <p style="color:#777;font-size:16px;">     Thanks for choosing Qoztore has your marketplace.your order has been received.
 Your order number 999988,.Ordered Delivery date between <?php echo date('M d,Y') ?> 
 and <?php echo date("M d, Y", strtotime("+3 day")) ; ?>.</p>
 <a href="/customerlogin" style="color:blue">LOGIN.</a>
 <p style="font-size:18px;">Thanks,</p> 
-<table>
-    <thead>
-    <tr>
-        <th>Product</th> <th>Qty</th> <th>Price</th></tr></thead>
-        <tbody>
-            <tr>
-                <td>Shoe</td><td>2</td><td>#2,000</td>
-</tr><tr> <td>Nike</td><td>2</td><td>#2,000</td></tr></tbody>
-            <tr><td></td><td>SubTotal</td><td>#8,000</td></tr>
-</table>
+
 </div>
 <footer class="site-footer">       
 		
