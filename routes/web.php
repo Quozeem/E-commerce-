@@ -17,6 +17,7 @@ Auth::routes();
 Route::get('emailtext',function(){
     return view('email/cartItem');
 });
+
 Route::get('error', function(){
     return view('errors/404');
 });
@@ -24,12 +25,6 @@ Route::get('error', function(){
 Route::get('searchSort/{sort}','SearchController@searchSort');
 Route::get('searchKyboard/{inputVal}','SearchController@searchKyboard');
 //Chat ServiceProvider
-Route::group(['middleware'=>'customer'],function(){
-    Route::get('meetsupport/{unique_id}','FunctionController@getSupportservice');
-    Route::get('serviceProvider','FunctionController@serviceProvider')->name('chat');
-    Route::post('getChat','FunctionController@getChat')->name('getChat');
-    Route::post('inser-chat','FunctionController@insertChat')->name('insertChat');
-});
 
 //Payment Gateway integration
 Route::get('/payment/callback',[App\Http\Controllers\PaymentController::class,'handleGatewayCallback']);
