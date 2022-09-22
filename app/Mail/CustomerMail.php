@@ -20,6 +20,7 @@ class CustomerMail extends Mailable
     {
         //
     }
+
   
     /**
      * Build the message.
