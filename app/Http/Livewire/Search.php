@@ -16,6 +16,7 @@ class Search extends Component
                       ->orWhere('price', 'like', '%'.$this->searchTerm.'%');
                      // ->orWhere('id', 'like', '%'.$this->searchTerm.'%');
         });
+
         $this->openMode=true;
  //return view('welcome',['user'=>$users]);
 
