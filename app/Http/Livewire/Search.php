@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 use App\Models\Mystores;
 use Livewire\Component;
 
+
 class Search extends Component
 {
 
