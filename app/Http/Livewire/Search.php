@@ -19,5 +19,4 @@ class Search extends Component
  //return view('welcome',['user'=>$users]);
 
     }
-    
-}
+    }
