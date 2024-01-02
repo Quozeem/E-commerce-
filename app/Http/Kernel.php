@@ -5,6 +5,7 @@ namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
+    http://themelooks.net/demo/serviney/html/preview/index.html
 {
     /**
      * The application's global HTTP middleware stack.
