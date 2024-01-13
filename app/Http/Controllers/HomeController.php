@@ -6,6 +6,26 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function buying():HasMany
+    {
+ $result=[];
+       $this->hasMany(Buying::class,'user_id')->where('usdt','!=',null)
+        ->orderBy('created_at', 'desc')->chunk(200,function ($items) use (&$result){
+            foreach($items as $item)
+            {
+                 $date = date("F j, Y h:ia", strtotime($item->created_at));
+               $result=  array(
+ 'time' =>  $date ,
+ 'realMoney'=>-(number_format($item->amountdeposit, 2, '.', ',')),
+  'subject'=>'Item Order',
+   'activities'=>'Item Order',
+ 'message'=> 'You have a new Order',
+ 'type'=>'USDT',
+   );
+            }
+    });
+    return $result;
+    }
     /**
      * Create a new controller instance.
      *
