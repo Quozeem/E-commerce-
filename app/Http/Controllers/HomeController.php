@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+      public function buying():HasMany
+  {
+      return $this->hasMany(Buying::class,'user_id')->where('usdt','!=',null)
+        ->latestOfMany();
+  }
     public function buying(): array
 {
     $result = [];
