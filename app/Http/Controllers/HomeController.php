@@ -8,8 +8,8 @@ class HomeController extends Controller
 {
       public function buying():HasMany
   {
-      return $this->hasMany(Buying::class,'user_id')->where('usdt','!=',null)
-        ->latestOfMany();
+      return $this->hasMany(Buying::class,'user_id')->whereNotNull('usdt')
+        ->ofMany('amountdeposit', 'max');
   }
     public function buying(): array
 {
