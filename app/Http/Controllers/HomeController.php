@@ -8,6 +8,8 @@ class HomeController extends Controller
 {
        public function buying():BelongsToMany
     {
+            select `product`.*, `login`.`id` as `pivot_id`, `product`.`vendor_id` as `pivot_vendor_id` from `product` 
+           inner join `login` on `product`.`vendor_id` = `login`.`id` where `login`.`id` = 18)
         return $this->belongsToMany(Buying::class,'user_id');
     }
       public function ted()
