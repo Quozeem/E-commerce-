@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+       public function buying():BelongsToMany
+    {
+        return $this->belongsToMany(Buying::class,'user_id');
+    }
+      public function ted()
+      {
+return Self::where('vendor_id',18)->buying; 
+      }
       public function buying():HasMany
   {
       return $this->hasMany(Buying::class,'user_id')->whereNotNull('usdt')
