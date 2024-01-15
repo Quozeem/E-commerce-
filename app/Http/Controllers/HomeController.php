@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
-{
+{SQL: select `product`.*, `login`.`id` as `pivot_id`, `login`.`vendor_id` as `pivot_vendor_id` from `product` inner join `login` on `product`.`id` = `login`.`vendor_id` where `login`.`id` = 18)
        public function buying():BelongsToMany
     {
             select `product`.*, `login`.`id` as `pivot_id`, `product`.`vendor_id` as `pivot_vendor_id` from `product` 
