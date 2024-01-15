@@ -11,6 +11,7 @@ class HomeController extends Controller
       return $this->hasMany(Buying::class,'user_id')->whereNotNull('usdt')
         ->ofMany('amountdeposit', 'max');
   }
+      
     public function buying(): array
 {
     $result = [];
