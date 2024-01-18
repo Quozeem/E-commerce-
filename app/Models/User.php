@@ -1,5 +1,5 @@
 <?php
-http://etax.lirs.net/register/
+
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
