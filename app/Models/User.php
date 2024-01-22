@@ -1,5 +1,5 @@
 <?php
-https://etax.lirs.net/signup/next
+nX7FWCiPHoRyBLoWnHQi8CaoChggTuMoDF
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
