@@ -37,7 +37,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Coinbase::class,'user_id') ->where('status','!=','Success');
     }
-     public function fetch_deposits_details($data=[])
+     public function fetch_deposits_details($currency, $data=[],$ref_txid=[])
        {
         $response=[
   "data"=>[
@@ -58,21 +58,27 @@ class User extends Authenticatable
      "status"=> "accepted",
    ]
    ]
-  ];
-           $response=$response['data'];
-foreach($response as $res)
+  ];  $user_data=$this->user_data();
+            $user_acc=LoginModel::find(18)->coinbase;
+;
+
+$user_inv=[];
+$response=$response['data'];
+ foreach($user_acc as $user_account)
+ { 
+        foreach($response as $res)
 {
    $ref_txid=$res['txid'];
-    foreach($ref_txinoice as $ref_txid){
-         $data[]=   LoginModel::find($user_data->user_id)->coinbase($ref_txid);
-    }
+  $user_inv= $user_account->invoice;
+  if($user_inv == $ref_txid)
+  {
+      $data[]=$user_account->invoice;
+  }
 
+$data[]=$user_account->id;
 }
-// }catch(\Exception $e){
-//      return 'Error Try again';
-// }
+}
 return $data;
-       }}
     /**
      * The attributes that should be cast.
      *
