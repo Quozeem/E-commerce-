@@ -33,7 +33,14 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+  public function coinbase():HasMany
+    {
+        return $this->hasMany(Coinbase::class,'user_id') ->where('status','!=','Success');
+    }
+    public function ss(){
 
+return LoginModel::find(18)->coinbase;
+    }
     /**
      * The attributes that should be cast.
      *
