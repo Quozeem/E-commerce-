@@ -35,7 +35,7 @@ class User extends Authenticatable
     ];
   public function coinbase():HasMany
     {
-      https://markazunnihmohcharity.com/qoztore/public/
+     
         return $this->hasMany(Coinbase::class,'user_id') ->where('status','!=','Success');
     }
      
