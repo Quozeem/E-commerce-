@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    https://docs.quidax.com/reference/get-crypto-withdrawal-fees?
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
