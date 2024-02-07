@@ -10,11 +10,12 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-      public function marchant_address(array $user_data=null)
+      public function marchant_address():array
    {
-          $user_data['quidax_user_id']='me';
-          return $user_data->quidax_user_id;
-   }
+          $user_data=json_encode([
+    'quidax_user_id' => 'me']);
+          return ($user_data->quidax_user_id);
+   } Attempt to read property &quot;quidax_user_id&quot; on string in file
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
