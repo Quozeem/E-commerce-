@@ -10,7 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    
+      public function marchant_address(array $user_data=null)
+   {
+          $user_data['quidax_user_id']='me';
+          return $user_data->quidax_user_id;
+   }
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
