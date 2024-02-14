@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+        $Quidax=new Quidax();
+        $Quidax=  $Quidax->where('user_id',$userId)->get();
     protected $fillable = [
         'fname',
         'email',
