@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-https://www.figma.com/file/TFgIH2FzPZh7wC7gzZ35OD/SQUAREMART-WEB?type=design&node-id=0%3A1&mode=design&t=DIpiNFq7PbjpeITU-1
+
 
 class User extends Authenticatable
 {
