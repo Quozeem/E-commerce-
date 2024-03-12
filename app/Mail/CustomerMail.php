@@ -16,6 +16,15 @@ class CustomerMail extends Mailable
      *
      * @return void
      */
+       $message = 'Verification';
+         $email=  $request->email;
+        $data_mail = ['name' => $request->name,'rand'=>$token];
+     
+        Mail::send('email.verification', $data_mail, function ($message) use ($email) {
+    $message->to($email);
+    $message->subject('Email Verification');
+});
+    <a href='https://squaremart.azj.wbp.mybluehost.me/api/mailverification?token='.<?php echo $rand ?>.<?php echo $name ?> >VERIFY EMAIL</a>
     public function __construct()
     {
         //
