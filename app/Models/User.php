@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+https://www.figma.com/file/lVjcKebTE2yT3tvxeW3W7S/Untitled?type=design&node-id=0%3A1&mode=design&t=P8QP3ZGKgeHvkqz0-1
 
 class User extends Authenticatable
 {
