@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+1hcATzNVAW7CgpvW5o8fa8xyhvsb7BxJarwVshei
 
-https://meet.google.com/erj-yvop-rfm
+
+This is the secret key
+
 class User extends Authenticatable
 {
        use HasApiTokens, HasFactory, Notifiable;
