@@ -9,7 +9,106 @@ use Laravel\Sanctum\HasApiTokens;
 
 
 
-This is the secret key
+  public function deposit_detail_webhook($currency)
+         {
+             
+           /************* if user deposit data alredy exit in database ***********/
+ try{
+$response =  $this->client->request('GET',  config('services.quidax.quidax_api_endpoint').'/deposits/all?currency='.$currency.'&state=checked', [
+  'headers' => [
+    'Authorization' => 'Bearer '.config('services.quidax.quidax_secret_key'),
+    'accept' => 'application/json',
+  ],
+]);
+
+$response= json_decode($response->getBody());
+$response= $response->data;
+}catch(\Exception $e){
+     return ['status'=>419];
+}
+$data_deposits=[];
+ 
+
+            
+if($response)
+{
+    foreach($response as $key=> $res)
+{    
+    $quidax_currency=strtoupper($res->currency);
+     $crypto_amount=$res->amount;
+             $CryptoModel= new CryptoModel();
+        $amountdeposit =  $CryptoModel->usd_conversion($quidax_currency,$crypto_amount);
+             $usd_rate= Usd_rates::first()->rates;
+          
+      $quidax_user_id = $res->user->id;
+      $quidax_id= $this->where('quidax_user_id',$quidax_user_id)->get();
+       foreach($quidax_id as $key=>  $val)
+ { 
+     $user_ID=$val->user_id;
+     $user_account_data= Coinbase::where('user_id',$user_ID)->get();
+      if(($user_account_data->isEmpty()))
+ {
+ 
+      if($res->status == 'checked'){
+//   //insert new deposits transaction that's succesful
+    $data=[
+                 'ref'=>$res->id,
+                  'invoice'=>$res->id,
+                 'user_id'=>$user_ID,
+                 'activities'=>'Received',
+                 'status'=> $res->status == 'checked' ? 'Success' : 'Pending',
+                 'amountdeposit'=>$amountdeposit,
+                 'type'=>$quidax_currency,
+                 'currency'=>'usd',
+                 $res->currency=>$crypto_amount,//crypto amount
+                //  'created_at'=> $res->created_at,
+                 ];
+   
+ }
+}
+    else
+     {
+        
+     foreach($user_account_data as $user_account)
+     {
+      $user_inv = $user_account->invoice;
+      $ref_txid=$res->id;
+  $foundMatch=false;
+  
+  if(($user_inv != $ref_txid) && ( $res->status == 'checked'))
+  {
+    
+      //insert new deposits transaction that's succesful
+      $data=[
+                 'ref'=>$res->id,
+                  'invoice'=>$res->id,
+                 'user_id'=>$user_ID,
+                 'activities'=>'Received',
+                 'status'=> $res->status == 'checked' ? 'Success' : 'Pending',
+                 'amountdeposit'=>$amountdeposit,
+                 'type'=>$quidax_currency,
+                 'currency'=>'usd',
+                 $res->currency=>$crypto_amount,//crypto amount
+                //  'created_at'=> $res->created_at,
+                 ];
+       $foundMatch=true;
+    break;
+    // return 3;
+  }
+  }
+ }
+ $data_deposits[]=$data;
+ 
+
+}
+
+}
+}
+else{
+     return ['status'=>404];
+}           
+Coinbase::insert($data_deposits);
+       }
 
 class User extends Authenticatable
 {
