@@ -7,6 +7,57 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+public function deposit_detail_webhook($currency)
+{
+    try {
+        $response = $this->client->request('GET', config('services.quidax.quidax_api_endpoint') . '/deposits/all?currency=' . $currency . '&state=checked', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . config('services.quidax.quidax_secret_key'),
+                'accept' => 'application/json',
+            ],
+        ]);
+
+        $response = json_decode($response->getBody());
+        $response = $response->data;
+    } catch (\Exception $e) {
+        return ['status' => 419];
+    }
+
+    if (!$response) {
+        return ['status' => 404];
+    }
+
+    foreach ($response as $res) {
+        $quidax_currency = strtoupper($res->currency);
+        $crypto_amount = $res->amount;
+        $CryptoModel = new CryptoModel();
+        $amountdeposit =  $CryptoModel->usd_conversion($quidax_currency, $crypto_amount);
+
+        $quidax_user_id = $res->user->id;
+        $quidax_id = $this->where('quidax_user_id', $quidax_user_id)->get();
+
+        foreach ($quidax_id as $val) {
+            $user_ID = $val->user_id;
+            $existing_deposit = Coinbase::where('user_id', $user_ID)->where('invoice', $res->id)->first();
+
+            if (!$existing_deposit && $res->status == 'checked') {
+                Coinbase::create([
+                    'ref' => $res->id,
+                    'invoice' => $res->id,
+                    'user_id' => $user_ID,
+                    'activities' => 'Received',
+                    'status' => 'Success',
+                    'amountdeposit' => $amountdeposit,
+                    'type' => $quidax_currency,
+                    'currency' => 'usd',
+                    $res->currency => $crypto_amount, //crypto amount
+                ]);
+            }
+        }
+    }
+
+    return ['status' => 200];
+}
 
 
   public function deposit_detail_webhook($currency)
