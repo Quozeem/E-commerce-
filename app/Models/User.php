@@ -21,7 +21,25 @@ class User extends Authenticatable
      *
      * @var array
      */
+   modify the code below  
+     <div className="copy-wallet" onClick={() => props.handleCopy(walletAddress.address,1)}>
+                  
+                  {props.switchButton && action === 1?  <IoMdCheckmark  style={{color:'green', height:"30px" , width:"30px"}}/> : 
+                   <AiOutlineCopy  style={{ height:"30px" , width:"30px"}}/>}
+                 
+                 
+              </div>
+
+      const handleCopy = (addresss) => {
+    copy(addresss);
+    setcopied(true)
    
+  };
+
+<Address
+                                    switchButton={copied}
+                                    handleCopy={handleCopy}
+                               Handlerclose={()=>Handlerclose()}/>
     protected $hidden = [
         'password',
         'remember_token',
